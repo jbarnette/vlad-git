@@ -1,0 +1,7 @@
+.autotest
+CHANGELOG.rdoc
+Manifest.txt
+README.rdoc
+Rakefile
+lib/vlad/git.rb
+test/test_vlad_git.rb
