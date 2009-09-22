@@ -12,23 +12,24 @@ class TestVladGit < VladTestCase
   # Checkout the way the default :update task invokes the method
   def test_checkout
     cmd = @scm.checkout 'head', '/the/scm/path'
-    assert_equal 'rm -rf /the/scm/path/repo && git clone git@myhost:/home/john/project1 /the/scm/path/repo && cd /the/scm/path/repo && git checkout -f -b deployed-HEAD HEAD && cd -', cmd
+    assert_equal 'rm -rf /the/scm/path/repo && git clone git@myhost:/home/john/project1 /the/scm/path/repo && cd /the/scm/path/repo && git submodule update --init && git checkout -f -b deployed-HEAD HEAD && cd -', cmd
   end
 
   # This is not how the :update task invokes the method
   def test_checkout_revision
     # Checkout to the current directory
     cmd = @scm.checkout 'master', '.'
-    assert_equal 'rm -rf ./repo && git clone git@myhost:/home/john/project1 ./repo && cd ./repo && git checkout -f -b deployed-master master && cd -', cmd
+    assert_equal "rm -rf ./repo && git clone git@myhost:/home/john/project1 ./repo && cd ./repo && git submodule update --init && git checkout -f -b deployed-master master && cd -", cmd
 
     # Checkout to a relative path
     cmd = @scm.checkout 'master', 'some/relative/path'
-    assert_equal 'rm -rf some/relative/path/repo && git clone git@myhost:/home/john/project1 some/relative/path/repo && cd some/relative/path/repo && git checkout -f -b deployed-master master && cd -', cmd
+    assert_equal 'rm -rf some/relative/path/repo && git clone git@myhost:/home/john/project1 some/relative/path/repo && cd some/relative/path/repo && git submodule update --init && git checkout -f -b deployed-master master && cd -', cmd
+
   end
 
   def test_export
     cmd = @scm.export 'master', 'the/release/path'
-    assert_equal 'mkdir -p the/release/path && cd repo && git archive --format=tar deployed-master | (cd the/release/path && tar xf -) && cd - && cd ..', cmd
+    assert_equal "mkdir -p the/release/path && cd repo && git archive --format=tar deployed-master | (cd the/release/path && tar xf -) && git submodule foreach 'git archive --format=tar \$sha1 | (cd the/release/path/\$path && tar xf -)' && cd - && cd ..", cmd
   end
 
   def test_revision

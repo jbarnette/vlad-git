@@ -17,6 +17,7 @@ class Vlad::Git
     [ "rm -rf #{destination}",
       "#{git_cmd} clone #{repository} #{destination}",
       "cd #{destination}",
+      "#{git_cmd} submodule update --init",
       "#{git_cmd} checkout -f -b deployed-#{revision} #{revision}",
       "cd -"
     ].join(" && ")
@@ -34,6 +35,7 @@ class Vlad::Git
     [ "mkdir -p #{destination}",
       "cd repo",
       "#{git_cmd} archive --format=tar #{revision} | (cd #{destination} && tar xf -)",
+      "#{git_cmd} submodule foreach '#{git_cmd} archive --format=tar $sha1 | (cd #{destination}/$path && tar xf -)'",
       "cd -",
       "cd .."
     ].join(" && ")
