@@ -1,8 +1,9 @@
 class Vlad::Git
 
-  VERSION = "2.0.0"
+  # Duh.
+  VERSION = "2.1.0"
 
-  set :source, Vlad::Git.new
+  set :source,  Vlad::Git.new
   set :git_cmd, "git"
 
   ##
