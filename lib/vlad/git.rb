@@ -20,7 +20,8 @@ class Vlad::Git
         "#{git_cmd} checkout -q origin",
         "#{git_cmd} fetch",
         "#{git_cmd} reset --hard #{revision}",
-        "#{git_cmd} submodule update --init",
+        "#{git_cmd} submodule init",
+        "#{git_cmd} submodule update",
         "#{git_cmd} branch -f deployed-#{revision} #{revision}",
         "#{git_cmd} checkout deployed-#{revision}",
         "cd -"
@@ -29,7 +30,8 @@ class Vlad::Git
       [ "rm -rf #{destination}",
         "#{git_cmd} clone #{repository} #{destination}",
         "cd #{destination}",
-        "#{git_cmd} submodule update --init",
+        "#{git_cmd} submodule init",
+        "#{git_cmd} submodule update",
         "#{git_cmd} checkout -f -b deployed-#{revision} #{revision}",
         "cd -"
       ].join(" && ")
