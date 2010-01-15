@@ -24,7 +24,7 @@ class TestVladGit < VladTestCase
   # (fast-mode) Checkout the way the default :update task invokes the method
   def test_checkout_fast
     cmd = @scm_fast.checkout 'head', '/the/scm/path'
-    assert_equal 'cd /the/scm/path/repo && git checkout -q origin && git fetch && git reset --hard HEAD && git submodule init && git submodule update && git branch -f deployed-HEAD HEAD && git checkout deployed-HEAD && cd -', cmd
+    assert_equal 'cd /the/scm/path/repo && git checkout -q origin && git fetch && git reset --hard origin && git submodule init && git submodule update && git branch -f deployed-HEAD HEAD && git checkout deployed-HEAD && cd -', cmd
   end
 
   # This is not how the :update task invokes the method
