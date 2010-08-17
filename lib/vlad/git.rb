@@ -80,7 +80,7 @@ class Vlad::Git
               "cd -; then exit 0; else exit 1; fi &>/dev/null" ].join(" && ")
       run cmd
       return true
-    rescue Vlad::CommandFailedError
+    rescue Rake::CommandFailedError
       return false
     end
   end

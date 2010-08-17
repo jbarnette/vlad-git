@@ -1,9 +1,9 @@
-require 'vlad_test_case'
+require 'rake/test_case'
 require 'vlad'
 require 'vlad/git'
 require 'mocha'
 
-class TestVladGit < VladTestCase
+class TestVladGit < Rake::TestCase
   def setup
     super
     @scm = Vlad::Git.new
