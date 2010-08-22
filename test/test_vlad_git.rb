@@ -1,9 +1,9 @@
-require 'rake/test_case'
+require 'minitest/autorun'
 require 'vlad'
 require 'vlad/git'
 require 'mocha'
 
-class TestVladGit < Rake::TestCase
+class TestVladGit < MiniTest::Unit::TestCase
   def setup
     super
     @scm = Vlad::Git.new
