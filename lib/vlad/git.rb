@@ -6,7 +6,6 @@ class Vlad::Git
   set :source,  Vlad::Git.new
   set :git_cmd, "git"
 
-  ##
   # Returns the command that will check out +revision+ from the
   # repository into directory +destination+.  +revision+ can be any
   # SHA1 or equivalent (e.g. branch, tag, etc...)
@@ -39,10 +38,9 @@ class Vlad::Git
     end
   end
 
-  ##
-  # Returns the command that will export +revision+ from the current directory
-  # into the directory +destination+.
-  # Expects to be run from +scm_path+ after Vlad::Git#checkout
+  # Returns the command that will export +revision+ from the current
+  # directory into the directory +destination+. Expects to be run
+  # from +scm_path+ after Vlad::Git#checkout.
 
   def export(revision, destination)
     revision = 'HEAD' if revision =~ /head/i
@@ -57,9 +55,8 @@ class Vlad::Git
     ].join(" && ")
   end
 
-  ##
-  # Returns a command that maps human-friendly revision identifier +revision+
-  # into a git SHA1.
+  # Returns a command that maps human-friendly revision identifier
+  # +revision+ into a git SHA1.
 
   def revision(revision)
     revision = 'HEAD' if revision =~ /head/i
