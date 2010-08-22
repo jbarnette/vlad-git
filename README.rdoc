@@ -42,12 +42,12 @@ rev-spec, set the :revision in config/deploy.rb:
 
 == Contributors
 
-* John Barnette (primary author) http://github.com/jbarnette
+* John Barnette http://github.com/jbarnette
 * Aaron Suggs http://github.com/ktheory
 
 == License
 
-Copyright 2009 Vlad contributors, John Barnette (jbarnette@rubyforge.org)
+Copyright 2009 Vlad contributors, John Barnette (code@jbarnette.com)
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
