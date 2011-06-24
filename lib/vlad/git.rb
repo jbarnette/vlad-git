@@ -20,8 +20,7 @@ class Vlad::Git
         "#{git_cmd} checkout -q origin",
         "#{git_cmd} fetch",
         "#{git_cmd} reset --hard #{new_revision}",
-        "#{git_cmd} submodule init",
-        "#{git_cmd} submodule update",
+        submodule_cmd,
         "#{git_cmd} branch -f deployed-#{revision} #{revision}",
         "#{git_cmd} checkout deployed-#{revision}",
         "cd -"
@@ -30,9 +29,8 @@ class Vlad::Git
       [ "rm -rf #{destination}",
         "#{git_cmd} clone #{repository} #{destination}",
         "cd #{destination}",
-        "#{git_cmd} submodule init",
-        "#{git_cmd} submodule update",
         "#{git_cmd} checkout -f -b deployed-#{revision} #{revision}",
+        submodule_cmd,
         "cd -"
       ].join(" && ")
     end
@@ -80,5 +78,9 @@ class Vlad::Git
     rescue Rake::CommandFailedError
       return false
     end
+  end
+
+  def submodule_cmd
+    %w(sync init update).map{|cmd| "#{git_cmd} submodule #{cmd}"}.join(" && ")
   end
 end
