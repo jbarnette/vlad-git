@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
 modules outside the core recipe have been extracted.}
   s.email = ["code@jbarnette.com", "aaron@ktheory.com"]
   s.extra_rdoc_files = ["Manifest.txt", "CHANGELOG.rdoc", "README.rdoc"]
-  s.files = [".autotest", "CHANGELOG.rdoc", "Manifest.txt", "README.rdoc", "Rakefile", "lib/vlad/git.rb", "test/test_vlad_git.rb", ".gemtest"]
+  s.files = [".autotest", "CHANGELOG.rdoc", "Manifest.txt", "README.rdoc", "Rakefile", "lib/vlad/git.rb", "test/test_vlad_git.rb"]
   s.homepage = %q{http://github.com/jbarnette/vlad-git}
   s.rdoc_options = ["--main", "README.rdoc"]
   s.require_paths = ["lib"]
