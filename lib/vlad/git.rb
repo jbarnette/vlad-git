@@ -81,6 +81,6 @@ class Vlad::Git
   end
 
   def submodule_cmd
-    %w(sync init update).map{|cmd| "#{git_cmd} submodule #{cmd}"}.join(" && ")
+    "#{git_cmd} submodule sync && #{git_cmd} submodule update --init --recursive"
   end
 end
