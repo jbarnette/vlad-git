@@ -22,7 +22,7 @@ In your Rakefile, load Vlad with the :scm => :git:
  begin
    require 'vlad'
    Vlad.load :scm => :git
- rescue
+ rescue LoadError
    # do nothing
  end
 
