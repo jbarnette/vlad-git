@@ -33,12 +33,21 @@ In config/deploy.rb, set the repository:
  set :deploy_to, "/path/to/install"
  set :repository, 'git@example.com:project'
 
-By default, vlad-git will deploy origin/master. To deploy an arbitrary
+By default, vlad-git will deploy "master". To deploy an arbitrary
 rev-spec, set the :revision in config/deploy.rb:
 
- set :revision, "origin/my_branch" # Deploy a branch
+ set :revision, "my_branch"        # Deploy a branch
  set :revision, "v2.0"             # Deploy a tag
  set :revision, "a3539b3f3e9edba1" # Deploy a commit
+
+If you want to deploy from your local repository, you can use
+
+ set :repository,  "file://#{Dir.pwd}"
+
+But you should be aware the that :revision refers branches, tags,
+commit-ids in the repository, and branch names may be different in
+your repository from branch names in a remote repository. And tags and
+commit-ids may not be up to date.
 
 == Contributors
 
