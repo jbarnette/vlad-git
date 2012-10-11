@@ -5,7 +5,7 @@ class Vlad::Git
 
   set :source,  Vlad::Git.new
   set :git_cmd, "git"
-  set :revision, "master" ##This can be either branch, tag or git-commit
+  set :revision, (revision || "master") ##This can be either branch, tag or git-commit
 
   # Returns the command that will check out +revision+ from the
   # repository into directory +destination+.  +revision+ can be any
