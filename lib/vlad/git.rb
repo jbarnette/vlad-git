@@ -30,6 +30,7 @@ class Vlad::Git
       [ "umask #{umask}",
         "rm -rf #{destination}",
         "#{git_cmd} clone #{repository} #{destination}",
+        "chmod $(expr 777 - `umask`) #{destination}",
         "cd #{destination}",
         "#{git_cmd} checkout -f -b deployed-#{revision} #{revision}",
         submodule_cmd,
