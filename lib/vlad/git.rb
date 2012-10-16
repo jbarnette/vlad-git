@@ -16,7 +16,8 @@ class Vlad::Git
     new_revision = ('HEAD' == revision) ? "origin" : revision
 
     if fast_checkout_applicable?(revision, destination)
-      [ "cd #{destination}",
+      [ "umask #{umask}",
+        "cd #{destination}",
         "#{git_cmd} checkout -q origin",
         "#{git_cmd} fetch",
         "#{git_cmd} reset --hard #{new_revision}",
@@ -26,8 +27,10 @@ class Vlad::Git
         "cd -"
       ].join(" && ")
     else
-      [ "rm -rf #{destination}",
+      [ "umask #{umask}",
+        "rm -rf #{destination}",
         "#{git_cmd} clone #{repository} #{destination}",
+        "chmod $(expr 777 - `umask`) #{destination}",
         "cd #{destination}",
         "#{git_cmd} checkout -f -b deployed-#{revision} #{revision}",
         submodule_cmd,
@@ -44,7 +47,8 @@ class Vlad::Git
     revision = 'HEAD' if revision =~ /head/i
     revision = "deployed-#{revision}"
 
-    [ "mkdir -p #{destination}",
+    [ "umask #{umask}",
+      "mkdir -p #{destination}",
       "cd repo",
       "#{git_cmd} archive --format=tar #{revision} | (cd #{destination} && tar xf -)",
       "#{git_cmd} submodule foreach '#{git_cmd} archive --format=tar $sha1 | (cd #{destination}/$path && tar xf -)'",
